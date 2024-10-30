@@ -8,9 +8,23 @@
 
 
 function createUser(user) {
-  // Ваш код
+  return (async () => {
+    const response = await fetch('https://jsonplaceholder.typicode.com/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: user.name,
+        email: user.email
+      })
+    });
+    return response.json();
+  })();
 }
 
-console.log(createUser({name: "Sam", email: "fjsnfkjns2342@gmail.com"}))
+createUser({ name: "Sam", email: "fjsnfkjns2342@gmail.com" })
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
 
 module.exports = createUser;
