@@ -5,17 +5,11 @@
 "https://jsonplaceholder.typicode.com/users - адреса куди робити запит"
 
 function fetchUsers() {
-  return fetch("https://jsonplaceholder.typicode.com/users")
-    .then(response => response.json())
-    .then(data => {
-      let users = [];
-      for (let i = 0; i < data.length; i++) {
-        users.push({ id: data[i].id, name: data[i].name });
-      }
-      return users;
-    })
-    .catch(error => console.error("Error fetching users:", error));
+return fetch('https://jsonplaceholder.typicode.com/users')
+.then(res=>res.json())
+.then(data=>data.map((item)=>item={id:item.id,name:item.name}))
 }
+
 
 console.log(fetchUsers())
 
