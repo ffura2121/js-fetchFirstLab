@@ -6,7 +6,22 @@
 
 
 function updateUser(id, updatedData) {
-  // Ваш код
+  const url = `https://jsonplaceholder.typicode.com/users/${id}`;
+  const options = {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name: updatedData.name }),
+  };
+
+  return fetch(url, options)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    });
 }
 
 console.log(updateUser(1, { name: 'New Name' }));
